@@ -1,0 +1,8 @@
+/target
+/tmp
+/pki
+**/*.rs.bk
+*.swp
+/.direnv
+/slimevault-data
+**/__pycache__/

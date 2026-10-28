@@ -1,0 +1,51 @@
+name: SlimeVault
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  world-storage:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust tools
+        run: rustup update stable --profile minimal && rustup default stable && rustup component add rustfmt
+      - name: Formatting
+        run: cargo fmt --all --check
+      - name: Build SlimeVault
+        run: cargo build --locked -p garage --bin slimevault --no-default-features --features bundled-libs,sqlite
+      - name: Unit tests
+        run: cargo test --locked -p garage_model -p garage_api_s3 --lib --features garage_db/bundled-libs
+      - name: Install S3 test client
+        run: python3 -m pip install -r tests/requirements.txt
+      - name: Real-server S3 tests
+        run: python3 tests/slimevault_e2e.py --binary target/debug/slimevault
+      - name: Leases, snapshots, retention and SRF validation
+        run: python3 tests/slimevault_control_e2e.py --binary target/debug/slimevault
+      - name: Three-node failure and recovery
+        run: python3 tests/slimevault_cluster_e2e.py --binary target/debug/slimevault
+      - name: Real network partition
+        run: |
+          docker pull debian:trixie-slim
+          python3 tests/slimevault_partition_e2e.py --binary target/debug/slimevault
+      - name: Existing S3 regression tests
+        env:
+          GARAGE_TEST_INTEGRATION_DB_ENGINE: sqlite
+        run: cargo test --locked -p garage --no-default-features --features bundled-libs,sqlite --test integration s3::
+
+  physical-gc:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust
+        run: rustup update stable --profile minimal && rustup default stable
+      - name: Build
+        run: cargo build --locked -p garage --bin slimevault --no-default-features --features bundled-libs,sqlite
+      - name: Install test dependencies
+        run: python3 -m pip install -r tests/requirements.txt
+      - name: Physical block reclamation with production grace
+        run: python3 tests/slimevault_gc_e2e.py --binary target/debug/slimevault

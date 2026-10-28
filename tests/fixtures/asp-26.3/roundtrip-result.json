@@ -1,0 +1,26 @@
+{
+  "target_source_commit": "3ab54bd48c7ecd28335d88e193b9c87af9275c49",
+  "target_source_version": "26.3.build.191-stable",
+  "server_jar_sha256": "e20bd78e554662850126ae0892453370a351723b314cafd130464095e943bd69",
+  "slimevault_binary_sha256": "39e075d76f7e8a176ac3d68836e6d7b47c2462ee3e439a13cbec827578afebf9",
+  "checks": [
+    "ASP server and official utility plugin boot",
+    "Server reports Minecraft 26.3",
+    "ASP generated and serialized a real world with blocks and block-entity NBT",
+    "Strict SRF validation accepts ASP-produced world and S3 stores first revision",
+    "Two real ASP revisions retain exact bytes and historical download restores v1",
+    "ASP deserializes restored SRF and confirms original block and chest item NBT",
+    "Version-specific S3 clone loads as a separate ASP world with original contents",
+    "Restored ASP world and contents survive a complete server restart"
+  ],
+  "passed": true,
+  "observed_runtime_build": "[06:13:42 INFO]: [bootstrap] Loading AdvancedSlimePaper 26.3-DEV-HEAD@3ab54bd (1970-01-01T00:00:00Z) for Minecraft 26.3",
+  "revision_v1": "b2a070ccfa5558fed827b81f65917955eb208635927bea79d70db9cb159f1181",
+  "revision_v2": "da41e8726093f76a0dca1ab74da8a9503466be042f6b934fc3eeaacc554362f9",
+  "clone_revision": "4cd4cb00cdac25362520fa32f3973fd834485c71715843282dc9e9cd0735fbf3",
+  "v1_sha256": "34658abe98e0fcfba14d5ff09cf2c61b38c02fd78ebc3335c70f2357448d7ed0",
+  "v2_sha256": "8cae1247726c9e767d075ba9a4be7513ba7e98a90171cb8198d7a1025d31a226",
+  "v1_bytes": 732,
+  "v2_bytes": 743,
+  "source_format": 13
+}

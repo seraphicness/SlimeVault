@@ -1,0 +1,16 @@
+{
+  "source_url": "https://github.com/InfernalSuite/AdvancedSlimePaper",
+  "branch": "dev/26.3",
+  "commit": "3ab54bd48c7ecd28335d88e193b9c87af9275c49",
+  "source_version": "26.3.build.191-stable",
+  "artifact_origin": "Locally built from the unmodified tracked upstream source; not an official CI download",
+  "java": "Eclipse Adoptium Temurin 25.0.5+8-LTS",
+  "gradle": "9.4.1",
+  "build_commands": [
+    "./gradlew applyAllPatches",
+    "./gradlew :aspaper-server:createPaperclipJar :plugin:shadowJar"
+  ],
+  "server_jar_sha256": "e20bd78e554662850126ae0892453370a351723b314cafd130464095e943bd69",
+  "plugin_jar_sha256": "679747205f161936a58fe9605df580583c3d31ca74f0e3f8518b0ace66bab78e",
+  "test_scope": "Local offline ASP server, built-in utility plugin and console commands; no custom Java integration plugin"
+}

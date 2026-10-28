@@ -1,0 +1,23 @@
+# Single-node development configuration. Replace rpc_secret before starting.
+metadata_dir = "./slimevault-data/meta"
+data_dir = "./slimevault-data/blocks"
+db_engine = "sqlite"
+metadata_fsync = true
+data_fsync = true
+replication_factor = 1
+rpc_bind_addr = "127.0.0.1:3901"
+rpc_public_addr = "127.0.0.1:3901"
+rpc_secret = "REPLACE_WITH_64_HEX_CHARACTERS"
+
+[s3_api]
+api_bind_addr = "127.0.0.1:3900"
+s3_region = "slimevault"
+slime_world_only = true
+world_require_lease = true
+world_validate_format = true
+world_max_bytes = 268435456
+world_max_expanded_bytes = 1073741824
+# For a cluster: set the same full node ID on every node.
+# world_coordinator = "64_HEX_NODE_ID"
+public_endpoint = "http://127.0.0.1:3900"
+public_endpoint_path_style = true
