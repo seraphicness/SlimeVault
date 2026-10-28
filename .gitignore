@@ -5,4 +5,5 @@
 *.swp
 /.direnv
 /slimevault-data
+/config/local.toml
 **/__pycache__/
